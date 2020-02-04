@@ -143,8 +143,7 @@ public:
 		return this->operator+=(str);
 	}
 
-	bool kstring_t::operator ==(const kstring_t& str) {
-
+	bool operator ==(const kstring_t& str) {
 		const char* pattern = m_cstr;
 		const char* string = str.c_str();
 
