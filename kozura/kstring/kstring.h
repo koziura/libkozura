@@ -62,6 +62,11 @@ public:
 			m_cstr[m_len] = '\0';
 		}
 	}
+	/*!
+	 * \brief operator =
+	 * \param str
+	 * \return
+	 */
 	kstring_t& operator =(const char* str) {
 		uint_t len = strlen(str);
 
@@ -76,7 +81,11 @@ public:
 		m_cstr[m_len] = '\0';
 		return *this;
 	}
-
+	/*!
+	 * \brief operator =
+	 * \param str
+	 * \return
+	 */
 	kstring_t& operator =(const kstring_t& str) {
 		uint_t len = str.size();
 
@@ -92,7 +101,11 @@ public:
 		m_cstr[m_len] = '\0';
 		return *this;
 	}
-
+	/*!
+	 * \brief operator +=
+	 * \param ch
+	 * \return
+	 */
 	kstring_t& operator +=(const char ch) {
 		uint_t len = 1;
 
@@ -106,7 +119,11 @@ public:
 		m_cstr[m_len] = '\0';
 		return *this;
 	}
-
+	/*!
+	 * \brief operator +=
+	 * \param str
+	 * \return
+	 */
 	kstring_t& operator +=(const char* str) {
 		uint_t len = strlen(str);
 
@@ -120,7 +137,11 @@ public:
 		m_cstr[m_len] = '\0';
 		return *this;
 	}
-
+	/*!
+	 * \brief operator +=
+	 * \param str
+	 * \return
+	 */
 	kstring_t& operator +=(const kstring_t& str) {
 		uint_t len = str.size();
 
@@ -134,15 +155,29 @@ public:
 		m_cstr[m_len] = '\0';
 		return *this;
 	}
-
-	kstring_t& operator +(const kstring_t& str) {
-		return this->operator+=(str);
+	/*!
+	 * \brief operator +
+	 * \param str
+	 * \return
+	 */
+	inline kstring_t operator +(const kstring_t& str) const {
+		kstring_t local = *this;
+		return local+=(str);
 	}
-
-	kstring_t& operator +(const char* str) {
-		return this->operator+=(str);
+	/*!
+	 * \brief operator +
+	 * \param str
+	 * \return
+	 */
+	inline kstring_t operator +(const char* str) const {
+		kstring_t local = *this;
+		return local+=(str);
 	}
-
+	/*!
+	 * \brief operator ==
+	 * \param str
+	 * \return
+	 */
 	bool operator ==(const kstring_t& str) {
 		const char* pattern = m_cstr;
 		const char* string = str.c_str();
@@ -227,6 +262,36 @@ public:
 		}
 		m_len = 0;
 		m_cstr = NULL;
+	}
+	/*!
+	 * \brief string_cast
+	 * \param val
+	 * \return
+	 */
+	static kstring_t string_cast(int val) {
+		char lcbuf[255];
+		sprintf(lcbuf, "%d", val);
+		return kstring_t(lcbuf);
+	}
+	/*!
+	 * \brief lstring_cast
+	 * \param val
+	 * \return
+	 */
+	static kstring_t string_cast(unsigned int val) {
+		char lcbuf[255];
+		sprintf(lcbuf, "%d", val);
+		return kstring_t(lcbuf);
+	}
+	/*!
+	 * \brief string_cast
+	 * \param val
+	 * \return
+	 */
+	static kstring_t string_cast(double val) {
+		char lcbuf[255];
+		sprintf(lcbuf, "%f", val);
+		return kstring_t(lcbuf);
 	}
 };
 /*!
