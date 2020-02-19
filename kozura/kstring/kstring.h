@@ -27,23 +27,23 @@ class kstring_t:
 	char* m_cstr;
 	uint_t m_len;
 	uint_t m_reserve;
-
+///
 public:
 	/*! */
-	~kstring_t() {
+	inline ~kstring_t() {
 		clear();
 	}
 	/*!
 	 * \brief kstring_t
 	 */
-	kstring_t():m_cstr(NULL), m_len(0), m_reserve(1) {
-
+	inline kstring_t():
+		m_cstr(NULL), m_len(0), m_reserve(1) {
 	}
 	/*!
 	 * \brief kstring_t
 	 * \param str
 	 */
-	kstring_t(const char* str): m_reserve(1) {
+	inline kstring_t(const char* str): m_reserve(1) {
 		m_len = strlen(str);
 		m_cstr = (char*)malloc(m_len+m_reserve);
 		memcpy(m_cstr, str, m_len);
@@ -53,7 +53,7 @@ public:
 	 * \brief kstring_t
 	 * \param str
 	 */
-	kstring_t(const kstring_t& str) {
+	inline kstring_t(const kstring_t& str) {
 		m_len = str.size();
 		m_reserve = str.m_reserve;
 		m_cstr = (char*)malloc(m_len+m_reserve);
@@ -67,7 +67,7 @@ public:
 	 * \param str
 	 * \return
 	 */
-	kstring_t& operator =(const char* str) {
+	inline kstring_t& operator =(const char* str) {
 		uint_t len = strlen(str);
 
 		if (len != m_len) {
@@ -86,7 +86,7 @@ public:
 	 * \param str
 	 * \return
 	 */
-	kstring_t& operator =(const kstring_t& str) {
+	inline kstring_t& operator =(const kstring_t& str) {
 		uint_t len = str.size();
 
 		if (len != m_len) {
@@ -106,7 +106,7 @@ public:
 	 * \param ch
 	 * \return
 	 */
-	kstring_t& operator +=(const char ch) {
+	inline kstring_t& operator +=(const char ch) {
 		uint_t len = 1;
 
 		if (m_cstr) {
@@ -124,7 +124,7 @@ public:
 	 * \param str
 	 * \return
 	 */
-	kstring_t& operator +=(const char* str) {
+	inline kstring_t& operator +=(const char* str) {
 		uint_t len = strlen(str);
 
 		if (m_cstr) {
@@ -142,7 +142,7 @@ public:
 	 * \param str
 	 * \return
 	 */
-	kstring_t& operator +=(const kstring_t& str) {
+	inline kstring_t& operator +=(const kstring_t& str) {
 		uint_t len = str.size();
 
 		if (m_cstr) {
@@ -160,7 +160,7 @@ public:
 	 * \param str
 	 * \return
 	 */
-	inline kstring_t operator +(const kstring_t& str) const {
+	inline inline kstring_t operator +(const kstring_t& str) const {
 		kstring_t local = *this;
 		return local+=(str);
 	}
@@ -178,7 +178,7 @@ public:
 	 * \param str
 	 * \return
 	 */
-	bool operator ==(const kstring_t& str) {
+	inline bool operator ==(const kstring_t& str) {
 		const char* pattern = m_cstr;
 		const char* string = str.c_str();
 
@@ -211,10 +211,18 @@ public:
 		return true;
 	}
 	/*!
+	 * \brief operator !=
+	 * \param str
+	 * \return
+	 */
+	inline bool operator !=(const kstring_t& str) {
+		return !(*this == str);
+	}
+	/*!
 	 * \brief size
 	 * \return
 	 */
-	uint_t size() const {
+	inline uint_t size() const {
 		return m_len;
 	}
 	/*!
@@ -222,7 +230,7 @@ public:
 	 * \param pos
 	 * \return
 	 */
-	const char& at(const uint_t& pos) const {
+	inline const char& at(const uint_t& pos) const {
 		return m_cstr[pos];
 	}
 	/*!
@@ -230,33 +238,33 @@ public:
 	 * \param pos
 	 * \return
 	 */
-	char& operator [](const uint_t& pos) {
+	inline char& operator [](const uint_t& pos) {
 		return m_cstr[pos];
 	}	/*!
 	 * \brief c_str
 	 * \return
 	 */
-	const char* c_str() const {
+	inline const char* c_str() const {
 		return m_cstr;
 	}
 	/*!
 	 * \brief empty
 	 * \return
 	 */
-	bool empty() const {
+	inline bool empty() const {
 		return !m_len;
 	}
 	/*!
 	 * \brief isNull
 	 * \return
 	 */
-	bool isNull() const {
+	inline bool isNull() const {
 		return m_cstr == NULL;
 	}
 	/*!
 	 * \brief clear
 	 */
-	void clear() {
+	inline void clear() {
 		if (m_cstr) {
 			free(m_cstr);
 		}
@@ -300,7 +308,7 @@ public:
  * \param str
  * \return
  */
-static inline kstring_t operator +(const char* c_str, const kstring_t& str) {
+inline kstring_t operator +(const char* c_str, const kstring_t& str) {
 	return kstring_t(c_str) + str;
 }
 /*!
@@ -309,9 +317,19 @@ static inline kstring_t operator +(const char* c_str, const kstring_t& str) {
  * \param str
  * \return
  */
-static inline bool operator ==(const char* c_str, const kstring_t& str) {
+inline bool operator ==(const char* c_str, const kstring_t& str) {
 	return kstring_t(c_str) == str;
 }
+/*!
+ * \brief operator !=
+ * \param c_str
+ * \param str
+ * \return
+ */
+inline bool operator !=(const char* c_str, const kstring_t& str) {
+	return kstring_t(c_str) != str;
+}
+///
 } // Namespace by Kozura(c) Inc.
 #endif //__KZR_STRING_H__
 ///
