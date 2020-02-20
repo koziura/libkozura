@@ -3,6 +3,7 @@
 #define __KZR_STRING_H__
 ///
 #include <stdlib.h>
+#include <stdio.h>
 #include <cstring>
 /*!
  * Namespace by Kozura(c) Inc.
@@ -53,7 +54,8 @@ public:
 	 * \brief kstring_t
 	 * \param str
 	 */
-	inline kstring_t(const kstring_t& str) {
+	inline kstring_t(const kstring_t& str): knoinheritance_t(str)
+	{
 		m_len = str.size();
 		m_reserve = str.m_reserve;
 		m_cstr = (char*)malloc(m_len+m_reserve);
@@ -160,7 +162,7 @@ public:
 	 * \param str
 	 * \return
 	 */
-	inline inline kstring_t operator +(const kstring_t& str) const {
+	inline kstring_t operator +(const kstring_t& str) const {
 		kstring_t local = *this;
 		return local+=(str);
 	}
