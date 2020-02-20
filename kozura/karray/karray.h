@@ -1,4 +1,4 @@
-#ifndef __KZR_ARRAY_H__
+﻿#ifndef __KZR_ARRAY_H__
 #define __KZR_ARRAY_H__
 /*!
  * Namespace by Kozura(c) Inc.

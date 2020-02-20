@@ -1,4 +1,4 @@
-///
+﻿///
 #ifndef __KZR_STRING_H__
 #define __KZR_STRING_H__
 ///

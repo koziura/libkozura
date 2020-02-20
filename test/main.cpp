@@ -1,4 +1,4 @@
-#include <kozura/string>
+﻿#include <kozura/string>
 #include <kozura/array>
 #include <cstring>
 #include <string>
