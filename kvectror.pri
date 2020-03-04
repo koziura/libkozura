@@ -3,5 +3,4 @@ INCLUDEPATH += \
 	$$PWD/
 
 HEADERS += \
-	$$PWD/kozura/karray/karray.h
-
+	$$PWD/kozura/kvector/kvector.h
