@@ -29,8 +29,17 @@ KOZURA_LIB = '$${PWD}/../'
 ! include($${KOZURA_LIB}/kstring.pri) {
 	error("Couldn't find the kstring.pri file!")
 }
+#
 ! include($${KOZURA_LIB}/karray.pri) {
 	error("Couldn't find the karray.pri file!")
+}
+#
+! include($${KOZURA_LIB}/kvector.pri) {
+	error("Couldn't find the kvector.pri file!")
+}
+#
+! include($${KOZURA_LIB}/kbytearray.pri) {
+	error("Couldn't find the kbytearray.pri file!")
 }
 #
 SOURCES += \
